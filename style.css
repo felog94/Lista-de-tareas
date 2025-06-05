@@ -1,0 +1,324 @@
+/* --- Estilos Generales y Reset --- */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f7f6; /* Color de fondo claro por defecto */
+    color: #333; /* Color de texto claro por defecto */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Transición suave para el modo oscuro */
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Alinea al inicio para que el contenido no se pegue al centro vertical */
+    min-height: 100vh; /* Altura mínima para ocupar toda la vista */
+    box-sizing: border-box; /* Incluye padding en el tamaño total */
+}
+
+.container {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    width: 100%;
+    margin-top: 50px; /* Margen superior para separarlo del borde */
+}
+
+/* --- Encabezado y Selector de Idioma --- */
+.header-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    flex-wrap: wrap; /* Para que se ajusten en pantallas pequeñas */
+    gap: 15px; /* Espacio entre el título y el selector */
+}
+
+h1 {
+    text-align: center;
+    color: #2c3e50;
+}
+
+.language-selector {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.language-selector label {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.language-selector select {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    background-color: #f0f0f0;
+    cursor: pointer;
+}
+
+
+/* --- Sección de Input de Tareas (CSS Grid para consistencia) --- */
+.task-input-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 15px; /* Espacio entre los elementos de la cuadrícula */
+    margin-bottom: 20px;
+    align-items: end; /* Alinea los elementos al final de su celda (útil para el botón si el input de fecha es más alto) */
+}
+
+.task-input-section input[type="text"],
+.task-input-section select,
+.task-input-section input[type="datetime-local"] {
+    width: 100%; /* Asegura que ocupen todo el ancho de su celda de grid */
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    box-sizing: border-box; /* Incluye padding y border en el ancho total */
+}
+
+.task-input-section button#add-task-btn {
+    width: 100%; /* El botón también ocupará todo el ancho de su celda de grid */
+    padding: 12px 20px;
+    background-color: #28a745; /* Verde para añadir */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.task-input-section button#add-task-btn:hover {
+    background-color: #218838;
+}
+
+/* --- Sección de Controles (Filtros y Modo Oscuro) --- */
+.controls-section {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    justify-content: center; /* Centra los botones de control */
+    flex-wrap: wrap;
+}
+
+.controls-section button {
+    padding: 10px 15px;
+    background-color: #007bff; /* Azul para filtros */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease;
+}
+
+.controls-section button:hover {
+    background-color: #0056b3;
+}
+
+#toggle-dark-mode {
+    background-color: #6c757d; /* Gris para el toggle */
+}
+
+#toggle-dark-mode:hover {
+    background-color: #5a6268;
+}
+
+
+/* --- Lista de Tareas --- */
+#task-list {
+    list-style: none;
+    padding: 0;
+}
+
+.task-item {
+    display: flex;
+    align-items: center;
+    background-color: #f9f9f9;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    transition: background-color 0.3s ease;
+    position: relative; /* Para posicionar elementos internos */
+}
+
+.task-item.completed {
+    background-color: #e0ffe0; /* Fondo más claro para completadas */
+    text-decoration: line-through;
+    opacity: 0.8;
+}
+
+.task-item .task-text {
+    flex-grow: 1; /* Permite que el texto ocupe el espacio disponible */
+    font-size: 1.1rem;
+    word-break: break-word; /* Evita desbordamiento de palabras largas */
+}
+
+.task-item .task-meta {
+    font-size: 0.85rem;
+    color: #666;
+    margin-left: 15px; /* Espacio entre el texto y la meta */
+    display: flex;
+    flex-direction: column; /* Apila categoría/prioridad/fecha */
+    gap: 3px;
+    text-align: right; /* Alinea el texto a la derecha */
+}
+
+.task-item .task-meta .priority-label {
+    padding: 3px 6px;
+    border-radius: 3px;
+    font-size: 0.75rem;
+    color: white;
+    display: inline-block; /* Para que el padding y color se vean bien */
+}
+
+/* Colores de prioridad */
+.priority-label.alta { background-color: #dc3545; } /* Rojo */
+.priority-label.media { background-color: #ffc107; color: #333;} /* Amarillo */
+.priority-label.baja { background-color: #17a2b8; } /* Azul claro */
+
+.task-item .due-date.overdue {
+    color: #dc3545; /* Rojo para fechas vencidas */
+    font-weight: bold;
+}
+.task-item .due-date.upcoming {
+    color: #ffc107; /* Amarillo para fechas cercanas */
+    font-weight: bold;
+}
+
+
+.task-item input[type="checkbox"] {
+    margin-right: 15px;
+    transform: scale(1.5); /* Hace el checkbox más grande */
+}
+
+.task-item .delete-btn {
+    background-color: #dc3545; /* Rojo para eliminar */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 12px;
+    margin-left: 15px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease;
+}
+
+.task-item .delete-btn:hover {
+    background-color: #c82333;
+}
+
+
+/* --- Modo Oscuro --- */
+body.dark-mode {
+    background-color: #2c3e50; /* Fondo oscuro */
+    color: #ecf0f1; /* Texto claro */
+}
+
+body.dark-mode .container {
+    background-color: #34495e; /* Contenedor oscuro */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode h1 {
+    color: #ecf0f1;
+}
+
+body.dark-mode .language-selector label {
+    color: #bdc3c7;
+}
+
+body.dark-mode .language-selector select {
+    background-color: #49637c;
+    border-color: #5f7a93;
+    color: #ecf0f1;
+}
+
+body.dark-mode .task-input-section input[type="text"],
+body.dark-mode .task-input-section select,
+body.dark-mode .task-input-section input[type="datetime-local"] {
+    background-color: #49637c;
+    border-color: #5f7a93;
+    color: #ecf0f1;
+}
+
+body.dark-mode .task-input-section input::placeholder {
+    color: #bdc3c7;
+}
+
+body.dark-mode .task-item {
+    background-color: #49637c;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+body.dark-mode .task-item.completed {
+    background-color: #3d566e;
+    color: #95a5a6;
+}
+
+body.dark-mode .task-item .task-meta {
+    color: #bdc3c7;
+}
+
+body.dark-mode .controls-section button {
+    background-color: #5b7f9f;
+}
+body.dark-mode .controls-section button:hover {
+    background-color: #4a6a8a;
+}
+body.dark-mode #toggle-dark-mode {
+    background-color: #95a5a6;
+    color: #333;
+}
+body.dark-mode #toggle-dark-mode:hover {
+    background-color: #859596;
+}
+
+
+/* --- Responsive Design (Media Queries) --- */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+        margin-top: 20px;
+    }
+    .header-controls {
+        flex-direction: column;
+        align-items: flex-start; /* Alinea al inicio en móvil */
+    }
+    .language-selector {
+        margin-top: 10px; /* Espacio si se apilan */
+        width: 100%; /* Ocupa todo el ancho disponible */
+        justify-content: center; /* Centra el selector en móvil */
+    }
+
+    .task-input-section {
+        /* En pantallas pequeñas, cada elemento ocupa su propia fila */
+        grid-template-columns: 1fr;
+    }
+    .controls-section {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .task-item {
+        flex-direction: column;
+        align-items: flex-start; /* Alinea elementos al inicio de la columna */
+        gap: 10px; /* Espacio entre elementos apilados */
+    }
+    .task-item input[type="checkbox"] {
+        margin-bottom: 10px; /* Espacio entre checkbox y texto */
+    }
+    .task-item .task-meta {
+        margin-left: 0;
+        width: 100%; /* Ocupa todo el ancho */
+        text-align: left; /* Alinea a la izquierda en móvil */
+    }
+    .task-item .delete-btn {
+        margin-top: 10px;
+        margin-left: 0;
+        width: 100%; /* Hace el botón de eliminar de ancho completo */
+    }
+}

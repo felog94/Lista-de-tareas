@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es"> <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="appTitle">Mi Lista de Tareas</title> <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header-controls">
+            <h1 data-i18n="mainHeading">Mi Lista de Tareas</h1> <div class="language-selector">
+                <label for="language-select" data-i18n="selectLanguage">Seleccionar Idioma:</label>
+                <select id="language-select">
+                    <option value="es">Español</option>
+                    <option value="en">English</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="task-input-section">
+            <input type="text" id="new-task-text" data-i18n-placeholder="newTaskPlaceholder" placeholder="Añadir nueva tarea...">
+            <select id="new-task-category">
+                <option value="personal" data-i18n="catPersonal">Personal</option>
+                <option value="trabajo" data-i18n="catWork">Trabajo</option>
+                <option value="compras" data-i18n="catShopping">Compras</option>
+                <option value="salud" data-i18n="catHealth">Salud</option>
+            </select>
+            <select id="new-task-priority">
+                <option value="baja" data-i18n="prioLow">Baja</option>
+                <option value="media" data-i18n="prioMedium">Media</option>
+                <option value="alta" data-i18n="prioHigh">Alta</option>
+            </select>
+            <input type="datetime-local" id="new-task-due-date">
+            <button id="add-task-btn" data-i18n="addTaskButton">Añadir Tarea</button>
+        </div>
+
+        <div class="controls-section">
+            <button id="show-all-btn" data-i18n="filterAll">Todas</button>
+            <button id="show-pending-btn" data-i18n="filterPending">Pendientes</button>
+            <button id="show-completed-btn" data-i18n="filterCompleted">Completadas</button>
+            <button id="toggle-dark-mode" data-i18n="darkModeButton">Modo Oscuro/Claro</button>
+        </div>
+
+        <ul id="task-list">
+            </ul>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
